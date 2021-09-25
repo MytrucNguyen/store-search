@@ -18,7 +18,6 @@ def create_app():
     @app.route("/backend/stores", methods=["GET"])
     async def stores(request):
         searchWord = request.args.get("searchWord")
-        # print(searchWord)
         stores = [
             {"id": 1, "name": "Buffalo", "tags": "gen3, northeast"},
             {"id": 2, "name": "Gilbert", "tags": "gen3, southwest, kitchen"},
@@ -47,16 +46,7 @@ def create_app():
             if searchWord.lower() in item.get("name").lower():
                 filtered_list.append(item)
                 
-
-        # filtered_store = filter(compare_words, stores)
-
         return response.json({'stores': filtered_list})
-
-    # def compare_words(store):
-    #     if store["name"].find(searchWord):
-    #         return True
-    #     else:
-    #         return False
 
     return app
 

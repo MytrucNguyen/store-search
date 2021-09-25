@@ -6,26 +6,21 @@ import CloseIcon from "@material-ui/icons/Close";
 function SearchBar({placeholder}) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
-  // const [stores, setStores] = useState([]);
 
-  const filterStoreBySearchWord = () => {
-    fetch("http://localhost/backend/stores/?searchWord=" + wordEntered)
+  const filterStoreBySearchWord = (searchWord) => {
+    fetch("http://localhost/backend/stores/?searchWord=" + searchWord)
       .then(response => response.json())
       .then(data => setFilteredData(data.stores));
   }
   const handleFilter = (e) => {
     const searchWord = e.target.value;
     setWordEntered(searchWord);
-    // handleSearch();
-    // const newFilter = stores.filter((value) => {
-    //   return value.name.toLowerCase().includes(searchWord.toLowerCase());
-    // });
 
     if (searchWord === "") {
       setFilteredData([]);
     } else {
-      // setFilteredData(newFilter);
-      filterStoreBySearchWord()
+      filterStoreBySearchWord(searchWord)
+
     }
   };
 
@@ -54,7 +49,7 @@ function SearchBar({placeholder}) {
 
       {filteredData.length !== 0 && (
         <div className="storeResults">
-          {filteredData.slice(0, 15).map((value, key) => {
+          {filteredData.slice(0, 5).map((value, key) => {
             return (
               <div className="storeItem">
                 <p>
@@ -65,6 +60,7 @@ function SearchBar({placeholder}) {
           })}
         </div>
       )}
+
     </div>
   );
 }
