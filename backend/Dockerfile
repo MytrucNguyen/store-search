@@ -12,7 +12,7 @@ ARG home="/usr/src/app"
 COPY ./requirements.txt ${home}/requirements.txt
 RUN pip3 install -r ${home}/requirements.txt
 
-COPY ./ ${home}
+COPY ./* ${home}
 
 RUN chmod +x ${home}/entrypoint.sh
 

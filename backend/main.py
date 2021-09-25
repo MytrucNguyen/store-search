@@ -16,7 +16,7 @@ def create_app():
         return response.html('<p>Backend</p>')
 
     # Modify to take a search filter and return only matching results
-    @app.route("/backend/stores", methods=["POST"])
+    @app.route("/backend/stores", methods=["GET"])
     async def stores(request):
         stores = [
             {"id": 1, "name": "Buffalo", "tags": "gen3, northeast"},
