@@ -22,4 +22,8 @@ The API backend is written in python and will need to be customized to take the 
 - You may use any existing resources that is available even an existing React component
 - You can run on any major OS (MacOS, Windows, Linux) but you will need `Docker` and `docker-compose` working
 
+![image](https://user-images.githubusercontent.com/80004058/134763507-d6b3f625-7ccc-4a1a-a867-2e9641b3d47e.png)
 
+![image](https://user-images.githubusercontent.com/80004058/134764456-14457d11-c20f-4361-acb4-4f08dadccbad.png)
+
+![image](https://user-images.githubusercontent.com/80004058/134764099-7d5ba206-f421-4e17-a884-8604747d5475.png)
