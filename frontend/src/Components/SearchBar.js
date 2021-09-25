@@ -6,41 +6,65 @@ import CloseIcon from "@material-ui/icons/Close";
 function SearchBar({placeholder}) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
-  const [stores, setStores] = useState([]);
+  // const [stores, setStores] = useState([]);
 
-  const handleSearch = (e) => {
-    // console.log("hello world");
-    fetch("http://localhost/backend/stores")
+  const filterStoreBySearchWord = () => {
+    fetch("http://localhost/backend/stores/?searchWord=" + wordEntered)
       .then(response => response.json())
-      .then(data => setStores(data.stores));
+      .then(data => setFilteredData(data.stores));
   }
+  const handleFilter = (e) => {
+    const searchWord = e.target.value;
+    setWordEntered(searchWord);
+    // handleSearch();
+    // const newFilter = stores.filter((value) => {
+    //   return value.name.toLowerCase().includes(searchWord.toLowerCase());
+    // });
 
-  console.log(stores);
+    if (searchWord === "") {
+      setFilteredData([]);
+    } else {
+      // setFilteredData(newFilter);
+      filterStoreBySearchWord()
+    }
+  };
+
+  const clearInput = () => {
+    setFilteredData([]);
+    setWordEntered("");
+  };
 
   return (
     <div className="SearchBar">
       <div className="searchInputs">
         <input
-          type="text"
-          placeholder={placeholder}
-          // value={wordEntered}
-          // onChange={handleSearch}
-        />
-        <button onClick={handleSearch} className="searchIcon">
+            type="text"
+            placeholder={placeholder}
+            value={wordEntered}
+            onChange={handleFilter}
+          />
+        <div className="searchIcon">
+        {filteredData.length === 0 ? (
             <SearchIcon />
-        </button>
+          ) : (
+              <CloseIcon id="clearBtn" onClick={clearInput} />
+            )}
+        </div>
       </div>
-      <div className="storeResults">
-        {stores.map((value, key) => {
-          return (
-            <div className="storeItem">
-              <p>
-                <p>{value.name}</p>
-              </p>
-            </div>
-          )
-        })}
-      </div>
+
+      {filteredData.length !== 0 && (
+        <div className="storeResults">
+          {filteredData.slice(0, 15).map((value, key) => {
+            return (
+              <div className="storeItem">
+                <p>
+                  <p>{value.name}</p>
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

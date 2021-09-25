@@ -56,10 +56,10 @@ input:focus {
     margin-left: 10px;
 }
 
-p:hover {
+.storeItem:hover {
     background-color: lightgrey;
 }
   
-  #clearBtn {
+#clearBtn {
     cursor: pointer;
-  }
+}

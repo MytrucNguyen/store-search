@@ -2,11 +2,10 @@ from sanic import Sanic, response
 from sanic_cors import CORS
 import json
 
-
 def create_app():
     app = Sanic(__name__)
     CORS(app, automatic_options=True)
-
+    
     @app.route("/", methods=["GET"])
     async def index(request):
         return response.json({'message': 'Backend Service !'}, headers={'X-Served-By': 'sanic'}, status=200)
@@ -18,6 +17,8 @@ def create_app():
     # Modify to take a search filter and return only matching results
     @app.route("/backend/stores", methods=["GET"])
     async def stores(request):
+        searchWord = request.args.get("searchWord")
+        # print(searchWord)
         stores = [
             {"id": 1, "name": "Buffalo", "tags": "gen3, northeast"},
             {"id": 2, "name": "Gilbert", "tags": "gen3, southwest, kitchen"},
@@ -40,8 +41,22 @@ def create_app():
             {"id": 19, "name": "Scottsdale 320", "tags": "gen3, southwest"},
             {"id": 20, "name": "Scottsdale 142", "tags": "gen4, southwest, kitchen"}
         ]
-        
-        return response.json({'stores': stores})
+        filtered_list = []
+
+        for item in stores:
+            if searchWord.lower() in item.get("name").lower():
+                filtered_list.append(item)
+                
+
+        # filtered_store = filter(compare_words, stores)
+
+        return response.json({'stores': filtered_list})
+
+    # def compare_words(store):
+    #     if store["name"].find(searchWord):
+    #         return True
+    #     else:
+    #         return False
 
     return app
 
