@@ -26,4 +26,4 @@ The API backend is written in python and will need to be customized to take the 
 
 ![image](https://user-images.githubusercontent.com/80004058/134764456-14457d11-c20f-4361-acb4-4f08dadccbad.png)
 
-![image](https://user-images.githubusercontent.com/80004058/134764099-7d5ba206-f421-4e17-a884-8604747d5475.png)
+![image](https://user-images.githubusercontent.com/80004058/134775408-a4e5d0df-d5a0-4b6d-84f8-bddd1fba23ac.png)
