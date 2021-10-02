@@ -43,10 +43,17 @@ def create_app():
         filtered_list = []
 
         for item in stores:
-            if searchWord.lower() in item.get("name").lower():
+            if (searchWord.lower() in item.get("name").lower() or searchWord.lower() in item.get("tags").lower()):
                 filtered_list.append(item)
-                
+        
+        for item in filtered_list:
+            tags = item.get("tags").replace(" ", "")
+            tags = tags.split(",")
+            item["tags"] = tags
+            
         return response.json({'stores': filtered_list})
+
+
 
     return app
 

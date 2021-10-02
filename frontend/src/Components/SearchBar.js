@@ -52,9 +52,13 @@ function SearchBar({placeholder}) {
           {filteredData.slice(0, 5).map((value, key) => {
             return (
               <div className="storeItem">
-                <p>
-                  <p>{value.name}</p>
-                </p>
+                <p>{value.name}</p>
+                <div className="storeTags">
+                {value.tags.map((value) => {
+                  return (
+                    <ul>{value}</ul>)
+                  })}
+                  </div>
               </div>
             );
           })}

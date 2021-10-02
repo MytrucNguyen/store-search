@@ -46,14 +46,24 @@ input:focus {
 
 .storeResults .storeItem {
     width: 100%;
-    height: 50px;
+    /* height: 50px; */
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    /* align-items: center; */
     color: black;
 }
   
+.storeItem{
+    border-bottom: .1rem solid black;
+}
+
 .storeItem p {
     margin-left: 10px;
+    margin-bottom: 0;
+}
+
+.storeTags{
+    display: flex;
 }
 
 .storeItem:hover {
