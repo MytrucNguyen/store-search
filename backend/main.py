@@ -18,6 +18,7 @@ def create_app():
     @app.route("/backend/stores", methods=["GET"])
     async def stores(request):
         searchWord = request.args.get("searchWord")
+        matches = searchWord.split(" ")
         stores = [
             {"id": 1, "name": "Buffalo", "tags": "gen3, northeast"},
             {"id": 2, "name": "Gilbert", "tags": "gen3, southwest, kitchen"},
@@ -40,20 +41,24 @@ def create_app():
             {"id": 19, "name": "Scottsdale 320", "tags": "gen3, southwest"},
             {"id": 20, "name": "Scottsdale 142", "tags": "gen4, southwest, kitchen"}
         ]
-        filtered_list = []
-
-        for item in stores:
-            if (searchWord.lower() in item.get("name").lower() or searchWord.lower() in item.get("tags").lower()):
-                filtered_list.append(item)
         
+        filtered_list = []
+        if(len(matches) > 1):
+            for item in stores:
+                if ((matches[0].lower() in item.get("name").lower() or matches[0].lower() in item.get("tags").lower()) and (matches[1].lower() in item.get("name").lower() or matches[1].lower() in item.get("tags").lower())):                  
+                    filtered_list.append(item)
+
+        else:
+            for item in stores:
+                if (searchWord.lower() in item.get("name").lower() or searchWord.lower() in item.get("tags").lower()):                    
+                    filtered_list.append(item)            
+
         for item in filtered_list:
             tags = item.get("tags").replace(" ", "")
             tags = tags.split(",")
             item["tags"] = tags
             
         return response.json({'stores': filtered_list})
-
-
 
     return app
 

@@ -46,7 +46,7 @@ input:focus {
 
 .storeResults .storeItem {
     width: 100%;
-    /* height: 50px; */
+    height: 80px;
     display: flex;
     flex-direction: column;
     /* align-items: center; */
